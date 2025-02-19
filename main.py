@@ -10,6 +10,7 @@ root.title("Local LLM")
 root.geometry("800x800")
 
 
+
 if not (os.path.exists(os.path.join(os.getcwd(), "images"))):
     os.mkdir(os.path.join(os.getcwd(), "images"))
 
@@ -32,7 +33,6 @@ def gen_screen():
         try:
             if "llava" in i.lower():
                 llavaModelName = i
-                print(llavaModelName)
         except:
             print("llava not found. please install using ollama")
             exit()
@@ -91,14 +91,14 @@ model_selection.set(models[0])
 model_selection_dropdown = OptionMenu(root, model_selection, *models)
 model_selection_dropdown.pack()
 
-user_input = Text(root, height=5, width= 60, font=("Helvetica", 14))
+user_input = Text(root, height=3, width= 80, font=("Helvetica", 11))
 user_input.pack()
 
 
 generate_button = Button(root, text="Generate", command=startThreadGen)
 generate_button.pack()
 
-outputBox = Text(root, height=18, width=60, font=("Helvetica", 14))
+outputBox = Text(root, height=30, width=80, font=("Helvetica", 11), wrap=WORD)
 outputBox.pack()
 ##################
 
