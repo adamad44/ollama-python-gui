@@ -1,9 +1,7 @@
 import tkinter as tk
 from tkinter import *
 import threading
-from get_models import get_models, get_size
-from generateAI import generate, generateLLAVA
-from screenshot import take_screenshot
+from utils import get_models, get_size, generate, generateLLAVA, take_screenshot, getModels, get_models_button_func
 import os 
 
 root = tk.Tk()
@@ -26,7 +24,16 @@ clearImages()
 models = get_models()
 
 
+def get_models_button_func():
+    new_window = tk.Toplevel(root)
+    new_window.title("Available Models")
+    new_window.geometry("400x400")
 
+    models_listbox = Listbox(new_window)
+    models_listbox.pack(fill=BOTH, expand=True)
+
+    for model in getModels():
+        models_listbox.insert(END, model)
 
 
 def gen_screen():
@@ -77,6 +84,7 @@ def startThreadGenImage():
 
 
 ##################
+
 size_label = Label(root, text=f"Total size of models: {get_size()} GB")
 size_label.pack()
 
@@ -90,6 +98,8 @@ model_selection.set(models[0])
 model_selection_dropdown = OptionMenu(root, model_selection, *models)
 model_selection_dropdown.pack()
 
+get_more_models_button = Button(root, text="Get More Models", command=lambda: get_models_button_func())
+get_more_models_button.pack()
 
 user_input = Text(root, height=5, width= 60, font=("Helvetica", 14))
 user_input.pack()
