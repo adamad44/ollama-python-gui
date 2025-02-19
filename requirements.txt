@@ -1,0 +1,5 @@
+ollama
+numpy
+opencv-python
+pyautogui
+tkinter
