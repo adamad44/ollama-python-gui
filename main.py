@@ -1,12 +1,14 @@
 import tkinter as tk
 from tkinter import *
 import threading
-from utils import get_models, get_size, generate, generateLLAVA, take_screenshot, getModels, get_models_button_func
+from utils import *
 import os 
+import ollama
 
 root = tk.Tk()
 root.title("Local LLM")
 root.geometry("800x800")
+
 
 if not (os.path.exists(os.path.join(os.getcwd(), "images"))):
     os.mkdir(os.path.join(os.getcwd(), "images"))
@@ -23,17 +25,6 @@ clearImages()
 
 models = get_models()
 
-
-def get_models_button_func():
-    new_window = tk.Toplevel(root)
-    new_window.title("Available Models")
-    new_window.geometry("400x400")
-
-    models_listbox = Listbox(new_window)
-    models_listbox.pack(fill=BOTH, expand=True)
-
-    for model in getModels():
-        models_listbox.insert(END, model)
 
 
 def gen_screen():
@@ -55,6 +46,8 @@ def gen_screen():
     outputBox.insert(END, response)
     generate_button.config(state=NORMAL, text="Generate", fg="black")
 
+def getMoreModels():
+    exec(open("get_models.py").read())
 
 def gen():
     if checkbox_var.get() == 0:
@@ -97,9 +90,6 @@ model_selection.set(models[0])
 
 model_selection_dropdown = OptionMenu(root, model_selection, *models)
 model_selection_dropdown.pack()
-
-get_more_models_button = Button(root, text="Get More Models", command=lambda: get_models_button_func())
-get_more_models_button.pack()
 
 user_input = Text(root, height=5, width= 60, font=("Helvetica", 14))
 user_input.pack()

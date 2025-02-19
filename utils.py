@@ -11,50 +11,11 @@ import tkinter as tk
 from tkinter import Listbox, BOTH
 
 
-def get_models_button_func(root):
-    new_window = tk.Toplevel(root)
-    new_window.title("Available Models")
-    new_window.geometry("400x400")
-
-    models_listbox = Listbox(new_window)
-    models_listbox.pack(fill=BOTH, expand=True)
-
-    
-    for model in getModels():
-        models_listbox.insert(END, model)
-    
-
-
-
 def take_screenshot():
     code = np.random.randint(99, 999999)
     image = pyautogui.screenshot()
     image1 = pyautogui.screenshot(f"images/{code}.png")
     return code
-
-
-
-
-
-def getModels():
-    listOfLLMS = [] 
-
-    url = 'https://ollama.com/search'
-    response = requests.get(url)
-    if response.status_code == 200:
-        soup = BeautifulSoup(response.content, 'html.parser')
-    
-        links = soup.find_all('a')
-        for link in links:
-            linkHREF = link.get('href')
-            if "/library/" in linkHREF:
-                LLMName = linkHREF.split("/library/")[1]
-                listOfLLMS.append(LLMName)
-    
-    else:
-        return (f"Failed to retrieve the page. Status code: {response.status_code}")
-    return listOfLLMS
-
 
 
 def get_models():
