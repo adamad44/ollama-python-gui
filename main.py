@@ -106,5 +106,4 @@ outputBox.pack()
 
 
 root.mainloop()
-
 clearImages()
