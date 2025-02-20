@@ -4,16 +4,12 @@ import threading
 from utils import *
 import os 
 
-
 root = tk.Tk()
 root.title("Local LLM")
 root.geometry("800x800")
 
-
-
 if not (os.path.exists(os.path.join(os.getcwd(), "images"))):
     os.mkdir(os.path.join(os.getcwd(), "images"))
-
 
 def clearImages():
     for root_dir, dirs, files in os.walk(os.path.join(os.getcwd(), "images")):
@@ -25,7 +21,6 @@ def clearImages():
 clearImages()
 
 models = get_models()
-
 
 
 def gen_screen():
