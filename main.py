@@ -3,7 +3,7 @@ from tkinter import *
 import threading
 from utils import *
 import os 
-import ollama
+
 
 root = tk.Tk()
 root.title("Local LLM")
