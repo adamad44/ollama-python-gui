@@ -7,6 +7,7 @@ import os
 root = tk.Tk()
 root.title("Local LLM")
 root.geometry("800x800")
+root.config(bg="#323232")
 
 if not (os.path.exists(os.path.join(os.getcwd(), "images"))):
     os.mkdir(os.path.join(os.getcwd(), "images"))
