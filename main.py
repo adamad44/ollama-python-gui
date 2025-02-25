@@ -58,11 +58,11 @@ def gen():
         query = user_input.get("1.0", END)
         generate(query, selected_model)
             
-        generate_button.config(state=NORMAL, text="Generate", fg=BUTTON_FG_COLOR)
+        generate_button.config(state=NORMAL, text="Generate", fg="black")
         stop_button.config(state=DISABLED)
     except Exception as e:
         outputBox.insert(END, f"An error occurred: {e}")
-        generate_button.config(state=NORMAL, text="Generate", fg=ERROR_FG_COLOR)
+        generate_button.config(state=NORMAL, text="Generate", fg="black")
         stop_button.config(state=DISABLED)
 
 def startThreadGen():
@@ -75,7 +75,9 @@ def stop_generation():
     stop_event.set()
 
 def on_enter(event):
-    startThreadGen()
+    if generate_button['state'] != DISABLED:  
+        startThreadGen()
+        return "break"
     return "break"
 
 def on_shift_enter(event):
@@ -85,7 +87,7 @@ def on_shift_enter(event):
 main_frame = Frame(root, bg=BACKGROUND_COLOR)
 main_frame.pack(fill=BOTH, expand=True, padx=20, pady=20)
 
-title_label = Label(main_frame, text="Local LLM Interface", font=("Helvetica", 16, "bold"), bg=BACKGROUND_COLOR, fg=TEXT_FG_COLOR)
+title_label = Label(main_frame, text="Ollama Interface", font=("Helvetica", 16, "bold"), bg=BACKGROUND_COLOR, fg=TEXT_FG_COLOR)
 title_label.pack(pady=(0, 15))
 
 output_frame = Frame(main_frame, bg=BORDER_COLOR, padx=2, pady=2)
@@ -125,10 +127,10 @@ model_selection_dropdown.config(bg=BUTTON_BG_COLOR, fg=BUTTON_FG_COLOR, font=("H
 model_selection_dropdown["menu"].config(bg=TEXT_BG_COLOR, fg=BUTTON_FG_COLOR, activebackground=DROPDOWN_HOVER)
 model_selection_dropdown.pack(side=LEFT, padx=5)
 
-generate_button = Button(control_frame, text="Generate", command=startThreadGen, bg=BUTTON_BG_COLOR, fg=BUTTON_FG_COLOR, font=("Helvetica", 11, "bold"), activebackground=BUTTON_ACTIVE_BG, activeforeground=BUTTON_FG_COLOR, relief=FLAT, padx=20, pady=5)
+generate_button = Button(control_frame, text="Generate", command=startThreadGen, bg=BUTTON_BG_COLOR, fg="black", font=("Helvetica", 11, "bold"), activebackground=BUTTON_ACTIVE_BG, activeforeground=BUTTON_FG_COLOR, relief=FLAT, padx=20, pady=5)
 generate_button.pack(side=RIGHT, padx=5)
 
-stop_button = Button(control_frame, text="Stop", command=stop_generation, bg=BUTTON_BG_COLOR, fg=BUTTON_FG_COLOR, font=("Helvetica", 11, "bold"), activebackground=BUTTON_ACTIVE_BG, activeforeground=BUTTON_FG_COLOR, relief=FLAT, padx=20, pady=5, state=DISABLED)
+stop_button = Button(control_frame, text="Stop", command=stop_generation, bg=BUTTON_BG_COLOR, fg="black", font=("Helvetica", 11, "bold"), activebackground=BUTTON_ACTIVE_BG, activeforeground=BUTTON_FG_COLOR, relief=FLAT, padx=20, pady=5, state=DISABLED)
 stop_button.pack(side=RIGHT, padx=5)
 
 status_frame = Frame(main_frame, bg=BACKGROUND_COLOR)
